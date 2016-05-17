@@ -1,0 +1,7 @@
+<h2>Uploaded file</h2>
+
+<%= @attachment.file_name %><br />
+<a href="<%= url_for(controller: 'files',
+                     action: 'download_file',
+                     id: @attachment.id)%>">Download</a><br />
+<a href="<%= url_for(:action => 'index')%>">Show all uploads</a>

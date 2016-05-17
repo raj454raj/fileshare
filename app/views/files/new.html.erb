@@ -1,0 +1,23 @@
+<h1>File Upload</h1>
+<!--
+<%#= form_tag({:action => 'upload'}, :multipart => true) do %>
+  <p><label for="upload_file">Select File</label>
+  <%#= file_field 'upload', 'datafile' %></p>
+  <%#= submit_tag 'Upload' %>
+<%# end %>
+-->
+<%= form_for :attachments, url: files_path, :html => { :multipart => true } do |f| %>
+  <p>
+    <%= f.label :file_name %><br>
+    <%= f.text_field :file_name, required: true %>
+  </p>
+
+  <p>
+    <%= f.label :file_upload %><br>
+    <%= f.file_field :file_upload, required: true %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,19 @@
+<h1>FileShare</h1>
+
+<a href="<%= url_for(action: 'new') %>">Upload</a>
+<h4>All uploaded files</h4>
+<table>
+<tr>
+  <th>File name</th>
+  <th>Download</th>
+</tr>
+<% @attachments.each do |attachment| %>
+  <tr>
+    <td><%= attachment.file_name %></td>
+    <td>
+      <a href="<%= url_for(action: 'download_file',
+                           id: attachment.id) %>">Download</a>
+    </td>
+  </tr>
+<% end %>
+</table>

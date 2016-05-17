@@ -1,4 +1,7 @@
 class FilesController < ApplicationController
+  include AbstractController::Callbacks
+  before_filter :require_user
+
   def index
     @attachments = Attachment.all
   end
@@ -21,7 +24,8 @@ class FilesController < ApplicationController
 
   def create
     attachment = params[:attachments]
-    file_path = get_file_path(attachment[:file_name])
+    file_name = attachment[:file_name]
+    file_path = get_file_path(file_name)
     attachment[:location] = file_path
     _, file_path = write_to_file(attachment, file_name, file_path)
     attachment[:location] = file_path

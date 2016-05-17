@@ -1,13 +1,12 @@
 Fileshare::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
-=begin
-  get 'fileshare/files/index' => 'files#index'
-  get 'fileshare/files/new' => 'files#new'
-  get 'fileshare/files/show' => 'files#show'
-  get "fileshare/files/download_file" => 'files#download_file'
-  post 'fileshare/files/upload' => 'files#upload'
-=end
+  get 'signup'  => 'users#new'
+  get 'login'  => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+
+  resources :users
   resources :files
   get 'files/download_file/:id' => 'files#download_file'
   # Sample of regular route:

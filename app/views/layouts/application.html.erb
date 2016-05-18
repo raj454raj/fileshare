@@ -7,6 +7,9 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash#{name}" %>
+  <% end %>
 
 <% if session[:user_id].nil? %>
   <a href="<%= url_for(controller: 'users', action: 'new') %>">Sign Up</a>

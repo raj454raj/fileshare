@@ -22,6 +22,16 @@ class FilesController < ApplicationController
     @attachment = Attachment.find(params[:id])
   end
 
+  def edit
+    @attachment = Attachment.find(params[:id])
+  end
+
+  def update
+    @attachment = Attachment.find(params[:id])
+    @attachment.update_attributes(params[:attachment])
+    redirect_to file_path(@attachment)
+  end
+
   def create
     attachment = params[:attachments]
     file_name = attachment[:file_name]
@@ -36,6 +46,12 @@ class FilesController < ApplicationController
     else
       redirect_to action: 'new'
     end
+  end
+
+  def destroy
+    attachment = Attachment.find(params[:id])
+    attachment.destroy
+    redirect_to files_path
   end
 
   private

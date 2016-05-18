@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(:version => 20160517133045) do
   create_table "attachments", :force => true do |t|
     t.string   "file_name"
     t.string   "location"
+    t.boolean  "public",     :default => true
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

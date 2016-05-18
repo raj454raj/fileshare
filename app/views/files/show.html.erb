@@ -1,7 +1,17 @@
 <h2>Uploaded file</h2>
 
-<%= @attachment.file_name %><br />
+Name: <%= @attachment.file_name %><br />
+Shared: <% if @attachment.public %>
+          Publicly
+        <% else %>
+          Privately
+        <% end %>
+<br />
+<br />
+<br />
 <a href="<%= url_for(controller: 'files',
                      action: 'download_file',
-                     id: @attachment.id)%>">Download</a><br />
-<a href="<%= url_for(:action => 'index')%>">Show all uploads</a>
+                     id: @attachment.id)%>">Download</a>
+<%= link_to 'Edit', edit_file_path(@attachment) %>
+<%= link_to 'Delete', file_path(@attachment), method: 'DELETE' %>
+<a href="<%= url_for(:action => 'index') %>">Show all uploads</a>

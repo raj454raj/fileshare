@@ -11,12 +11,16 @@
     <%= content_tag :div, msg, :id => "flash#{name}" %>
   <% end %>
 
-<% if session[:user_id].nil? %>
-  <a href="<%= url_for(controller: 'users', action: 'new') %>">Sign Up</a>
-  <a href="<%= url_for(controller: 'sessions', action: 'new') %>">Login</a>
-<% else %>
-  <%= link_to "Logout", logout_path, method: 'delete' %>
-<% end %>
+<div id="user_nav">
+  <% if current_user %>
+    Welcome <%= current_user.username %>
+    <%= link_to "Log out", logout_path, method: 'delete' %>
+  <% else %>
+    <%= link_to "Sign up", signup_path %> or
+    <%= link_to "Log in", login_path %>
+  <% end %>
+</div>
+
 <%= yield %>
 </body>
 </html>

@@ -3,6 +3,8 @@ class CreateAttachments < ActiveRecord::Migration
     create_table :attachments do |t|
       t.string 'file_name'
       t.string 'location'
+      t.boolean 'public', default: true
+      t.references :user, index: true, foreign_key: true
       t.timestamps
     end
   end

@@ -1,0 +1,26 @@
+<h4>Publicly shared files</h4>
+
+<table>
+  <tr>
+    <th>File name</th>
+    <th>Actions</th>
+  </tr>
+<% @attachments.each do |attachment| %>
+  <tr>
+    <td><%= attachment.file_name %></td>
+    <td>
+      <%= link_to 'Show',  url_for(action: 'show',
+                                   controller: 'files',
+                                   id: attachment.id,
+                                   user_id: attachment.user_id) %>
+      <%= link_to 'Download',  url_for(action: 'download_file',
+                                       controller: 'files',
+                                       id: attachment.id,
+                                       user_id: attachment.user_id) %>
+    </td>
+  </tr>
+<% end %>
+
+<% if session[:user_id] %>
+  <h5><%= link_to 'My files', user_path(session[:user_id]) %></h5>
+<% end %>

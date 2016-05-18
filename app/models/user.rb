@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   validates_presence_of :username
   validates_uniqueness_of :username
   before_save :encrypt_password
+  has_many :attachments, :dependent => :destroy
 
   def encrypt_password
     if password.present?

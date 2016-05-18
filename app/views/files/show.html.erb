@@ -5,13 +5,14 @@ Shared: <% if @attachment.public %>
           Publicly
         <% else %>
           Privately
-        <% end %>
+        <% end %> <br />
+Uploaded by: <%= @user.username %>
 <br />
 <br />
 <br />
 <a href="<%= url_for(controller: 'files',
                      action: 'download_file',
                      id: @attachment.id)%>">Download</a>
-<%= link_to 'Edit', edit_file_path(@attachment) %>
-<%= link_to 'Delete', file_path(@attachment), method: 'DELETE' %>
-<a href="<%= url_for(:action => 'index') %>">Show all uploads</a>
+<%= link_to 'Edit', edit_user_file_path(@user, @attachment) %>
+<%= link_to 'Delete', user_file_path(@user, @attachment), method: 'DELETE' %>
+<%= link_to 'Show all uploads', user_path(@user) %>

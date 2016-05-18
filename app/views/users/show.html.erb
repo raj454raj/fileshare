@@ -1,0 +1,31 @@
+<%= link_to 'Upload file', new_user_file_path(@user) %>
+
+<h3><%= link_to 'Public_files', controller: 'files', action: 'public_files' %></h3>
+<h5>Your attachments</h5>
+<table>
+  <tr>
+    <th>File name</th>
+    <th>Shared with</th>
+    <th>Actions</th>
+  </tr>
+<% @user.attachments.each do |attachment| %>
+  <tr>
+    <td><%= attachment.file_name %></td>
+    <td><%= if attachment.public
+              'Public'
+            else
+              'Private'
+            end
+            %></td>
+    <td>
+      <%= link_to 'Download',  url_for(action: 'download_file',
+                                       controller: 'files',
+                                       id: attachment.id,
+                                       user_id: @user.id) %>
+      <%= link_to 'Show', user_file_path(@user, attachment) %>
+      <%= link_to 'Edit', edit_user_file_path(@user, attachment) %>
+      <%= link_to 'Delete', user_file_path(@user, attachment), method: 'DELETE' %>
+    </td>
+  </tr>
+<% end %>
+</table>

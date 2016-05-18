@@ -1,5 +1,5 @@
 <h3>Update Attachment</h3>
-<%= form_for :attachment, url: file_path(@attachment), html: { method: 'PUT' } do |f| %>
+<%= form_for :attachment, url: user_file_path(@user, @attachment), html: { method: 'PUT' } do |f| %>
   <p>
     <%= f.label :file_name %><br>
     <%= f.text_field :file_name, required: true %>

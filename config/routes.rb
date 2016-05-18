@@ -3,12 +3,14 @@ Fileshare::Application.routes.draw do
   # first created -> highest priority.
   get 'signup'  => 'users#new'
   get 'login'  => 'sessions#new'
+  get 'public_files'  => 'files#public_files'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  resources :users
-  resources :files
-  get 'files/download_file/:id' => 'files#download_file'
+  resources :users do
+    resources :files
+    get 'files/download_file/:id' => 'files#download_file'
+  end
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

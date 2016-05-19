@@ -17,6 +17,10 @@ class FilesController < ApplicationController
   def show
     @user = User.find(params[:user_id])
     @attachment = Attachment.find(params[:id])
+    redirect_to public_files_path if (!@attachment.public) && \
+                                     ((user_signed_in? &&
+                                       current_user.id != @user.id) || \
+                                      !user_signed_in?)
   end
 
   def edit

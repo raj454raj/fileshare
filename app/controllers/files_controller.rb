@@ -1,6 +1,6 @@
 class FilesController < ApplicationController
   include AbstractController::Callbacks
-  before_filter :require_user, except: [:public_files, :download_file, :show]
+  before_filter :authenticate_user!, except: [:public_files, :download_file, :show]
 
   def index
     @attachments = Attachment.all
@@ -28,20 +28,17 @@ class FilesController < ApplicationController
   end
 
   def edit
-    @user = User.find(session[:user_id])
-    redirect_to user_path(@user) if session[:user_id] != params[:user_id].to_i
-    @attachment = @user.attachments.find(params[:id])
+    redirect_to user_path(current_user) if current_user.id != params[:user_id].to_i
+    @attachment = current_user.attachments.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:user_id])
-    @attachment = @user.attachments.find(params[:id])
+    @attachment = current_user.attachments.find(params[:id])
     @attachment.update_attributes(params[:attachment])
-    redirect_to user_file_path(@user, @attachment)
+    redirect_to user_file_path(current_user, @attachment)
   end
 
   def create
-    @user = User.find(params[:user_id])
     attachment = params[:attachment]
     file_name = attachment[:file_name]
     file_path = get_file_path(file_name)
@@ -49,21 +46,20 @@ class FilesController < ApplicationController
     _, file_path = write_to_file(attachment, file_name, file_path)
     attachment[:location] = file_path
     attachment.delete(:file_upload)
-    @attachment = @user.attachments.new(attachment)
+    @attachment = current_user.attachments.new(attachment)
     if @attachment.save
-      redirect_to user_path(@user)
+      redirect_to user_path(current_user)
     else
       redirect_to action: 'new'
     end
   end
 
   def destroy
-    user = User.find(params[:user_id])
-    redirect_to user_path(user) if session[:user_id] != params[:user_id].to_i
-    attachment = user.attachments.find(params[:id])
+    redirect_to user_path(current_user) if current_user.id != params[:user_id].to_i
+    attachment = current_user.attachments.find(params[:id])
     File.delete(attachment.location)
     attachment.destroy
-    redirect_to user_path(user)
+    redirect_to user_path(current_user)
   end
 
   private

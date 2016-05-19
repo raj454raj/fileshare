@@ -1,11 +1,13 @@
 Fileshare::Application.routes.draw do
+
+  devise_for :users, :path_names => { :sign_in => 'login',
+                                      :sign_out => 'logout',
+                                      :sign_up => 'new' }
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
-  get 'signup'  => 'users#new'
-  get 'login'  => 'sessions#new'
+  root :to => 'files#public_files'
   get 'public_files'  => 'files#public_files'
-  post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
 
   resources :users do
     resources :files

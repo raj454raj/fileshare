@@ -1,4 +1,4 @@
-<%= link_to 'Upload file', new_user_file_path(@user) %>
+<%= link_to 'Upload file', new_user_file_path(current_user) %>
 
 <h3><%= link_to 'Public_files', controller: 'files', action: 'public_files' %></h3>
 <h5>Your attachments</h5>
@@ -8,7 +8,7 @@
     <th>Shared with</th>
     <th>Actions</th>
   </tr>
-<% @user.attachments.each do |attachment| %>
+<% current_user.attachments.each do |attachment| %>
   <tr>
     <td><%= attachment.file_name %></td>
     <td><%= if attachment.public
@@ -21,10 +21,10 @@
       <%= link_to 'Download',  url_for(action: 'download_file',
                                        controller: 'files',
                                        id: attachment.id,
-                                       user_id: @user.id) %>
-      <%= link_to 'Show', user_file_path(@user, attachment) %>
-      <%= link_to 'Edit', edit_user_file_path(@user, attachment) %>
-      <%= link_to 'Delete', user_file_path(@user, attachment), method: 'DELETE' %>
+                                       user_id: current_user.id) %>
+      <%= link_to 'Show', user_file_path(current_user, attachment) %>
+      <%= link_to 'Edit', edit_user_file_path(current_user, attachment) %>
+      <%= link_to 'Delete', user_file_path(current_user, attachment), method: 'DELETE' %>
     </td>
   </tr>
 <% end %>

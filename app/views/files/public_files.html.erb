@@ -21,6 +21,6 @@
   </tr>
 <% end %>
 
-<% if session[:user_id] %>
-  <h5><%= link_to 'My files', user_path(session[:user_id]) %></h5>
+<% if user_signed_in? %>
+  <h5><%= link_to 'My files', user_path(current_user.id) %></h5>
 <% end %>

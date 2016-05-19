@@ -7,6 +7,8 @@ gem 'rails', '3.0.9'
 
 gem 'sqlite3'
 gem 'bcrypt'
+gem 'devise', '1.5.4'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

@@ -10,6 +10,11 @@ gem 'bcrypt'
 gem 'devise', '1.5.4'
 gem 'paperclip', '~> 2.0'
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.4'
+end
+
+gem 'factory_girl', '1.3'
 # Use unicorn as the web server
 # gem 'unicorn'
 

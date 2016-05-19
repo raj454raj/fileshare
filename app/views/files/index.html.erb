@@ -11,8 +11,7 @@
   <tr>
     <td><%= attachment.file_name %></td>
     <td>
-      <a href="<%= url_for(action: 'download_file',
-                           id: attachment.id) %>">Download</a>
+      <%= link_to 'Download', attachment.doc.url %>
       <a href="<%= url_for(action: 'show',
                            id: attachment.id) %>">Show</a>
     </td>

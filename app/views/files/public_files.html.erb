@@ -13,10 +13,7 @@
                                    controller: 'files',
                                    id: attachment.id,
                                    user_id: attachment.user_id) %>
-      <%= link_to 'Download',  url_for(action: 'download_file',
-                                       controller: 'files',
-                                       id: attachment.id,
-                                       user_id: attachment.user_id) %>
+      <%= link_to 'Download', attachment.doc.url %>
     </td>
   </tr>
 <% end %>

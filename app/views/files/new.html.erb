@@ -1,5 +1,6 @@
 <h1>File Upload</h1>
 <%= form_for :attachment, url: user_files_path, :html => { :multipart => true } do |f| %>
+  <%= render 'shared/errors', object: @attachment %>
   <p>
     <%= f.label :file_name %><br>
     <%= f.text_field :file_name, required: true %>
@@ -11,8 +12,8 @@
   </p>
 
   <p>
-    <%= f.label :file_upload %><br>
-    <%= f.file_field :file_upload, required: true %>
+    <%= f.label :doc %><br>
+    <%= f.file_field :doc, required: true %>
   </p>
 
   <p>

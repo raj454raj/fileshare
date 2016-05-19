@@ -11,7 +11,6 @@ Fileshare::Application.routes.draw do
 
   resources :users do
     resources :files
-    get 'files/download_file/:id' => 'files#download_file'
   end
 
   # Sample of regular route:

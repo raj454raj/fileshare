@@ -18,10 +18,7 @@
             end
             %></td>
     <td>
-      <%= link_to 'Download',  url_for(action: 'download_file',
-                                       controller: 'files',
-                                       id: attachment.id,
-                                       user_id: current_user.id) %>
+      <%= link_to 'Download', attachment.doc.url %>
       <%= link_to 'Show', user_file_path(current_user, attachment) %>
       <%= link_to 'Edit', edit_user_file_path(current_user, attachment) %>
       <%= link_to 'Delete', user_file_path(current_user, attachment), method: 'DELETE' %>
